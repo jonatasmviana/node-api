@@ -16,32 +16,26 @@ const UserController = {
 
 	async store(req, res) {
 
+		if (!Object.keys(req.body).length)
+			return res.json('No data entered');
+
 		const { name, email, password } = req.body;
 		const userExists = await User.findOne({ email: email });
+
 		if (userExists)
 			return res.json("Usuário já existe!");
 
-		const user = await User.create({
-			name,
-			email,
-			password,
-		});
-
-		return res.json(user);
+		await User.create({ name, email, password, });
+		return res.json('Ok');
 	},
 
 	async update(req, res) {
-
-		const data = {};
-		if (req.body.name)
-			data.name = req.body.name
-
-		if (req.body.email)
-			data.email = req.body.email
+		if (!Object.keys(req.body).length)
+			return res.json('No data entered');
 
 		const filter = { _id: req.params.userId };
-		const user = await User.findOneAndUpdate(filter, data, { new: true });
-		return res.json(user);
+		const user = await User.findOneAndUpdate(filter, req.body, { new: true });
+		return res.json('Ok');
 	},
 
 	async delete(req, res) {

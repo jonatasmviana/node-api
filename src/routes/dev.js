@@ -5,4 +5,4 @@ routes.get('/devs', DevController.getDevByUserName);
 routes.get('/devs/todos', DevController.getAllDevs);
 routes.get('/devs/:devId', DevController.getDevById);
 
-module.exports = routes;
+module.exports = server => server.use('', routes);

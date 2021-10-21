@@ -1,7 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+
 const server = express();
+server.use(cors());
+server.use(express.json());
+require('./router')(server);
+
 
 const port = 3333;
 const user = 'user';
@@ -15,8 +20,4 @@ mongoose.connect(urlConnect, {
 	useUnifiedTopology: true
 });
 
-server.use(cors());
-server.use(express.json());
-server.use(require('./routes/user'));
-server.use(require('./routes/dev'));
 server.listen(port);
