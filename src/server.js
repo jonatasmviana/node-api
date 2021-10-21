@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const routes = require('./routes');
 const server = express();
 
 const port = 3333;
@@ -18,5 +17,6 @@ mongoose.connect(urlConnect, {
 
 server.use(cors());
 server.use(express.json());
-server.use(routes);
+server.use(require('./routes/user'));
+server.use(require('./routes/dev'));
 server.listen(port);
