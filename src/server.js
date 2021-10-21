@@ -7,7 +7,7 @@ const server = express();
 const port = 3333;
 const user = 'user';
 const pass = 'pass';
-const cluster = 'cluester';
+const cluster = 'cluster';
 const baseName = 'basename';
 const urlConnect = 'mongodb+srv://' + user + ':' + pass + cluster + '/' + baseName + '?retryWrites=true&w=majority';
 
