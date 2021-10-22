@@ -7,17 +7,19 @@ server.use(cors());
 server.use(express.json());
 require('./router')(server);
 
-
-const port = 3333;
-const user = 'user';
-const pass = 'pass';
-const cluster = 'cluster';
-const baseName = 'basename';
-const urlConnect = 'mongodb+srv://' + user + ':' + pass + cluster + '/' + baseName + '?retryWrites=true&w=majority';
+const authConfig = require('./config/connection.json');
+const urlConnect = 'mongodb+srv://'
+	.concat(authConfig.user)
+	.concat(':')
+	.concat(authConfig.pass)
+	.concat(authConfig.cluster)
+	.concat('/')
+	.concat(authConfig.baseName)
+	.concat('?retryWrites=true&w=majority');
 
 mongoose.connect(urlConnect, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
 });
 
-server.listen(port);
+server.listen(authConfig.port);

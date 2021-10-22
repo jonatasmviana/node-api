@@ -1,6 +1,8 @@
 const routes = require('express').Router();
-const UserController = require('../controllers/UserController');
+const authMiddleware = require('../middlewares/auth');
+routes.use(authMiddleware);
 
+const UserController = require('../controllers/UserController');
 routes.get('/users', UserController.getAllUsers);
 routes.get('/user/:userId', UserController.getUserById);
 routes.post('/user', UserController.store);
